@@ -1,3 +1,3 @@
 # link-check-test
 
-Repo to test borken links action
+Repo to test broken links action
