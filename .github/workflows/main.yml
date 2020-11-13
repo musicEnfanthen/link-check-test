@@ -37,4 +37,5 @@ jobs:
       
     - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
       with:
+        use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
