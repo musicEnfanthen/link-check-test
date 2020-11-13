@@ -50,6 +50,7 @@ jobs:
         use-verbose-mode: 'yes'
     
     - name: Add comment with link
+      if: failure()
       uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
