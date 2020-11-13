@@ -31,9 +31,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+      
+    - uses: actions/checkout@v2
       with:
         repository: musicEnfanthen/music-encoding.github.io
         ref: master
+        path: check-dir
       
     - name: Check file path
       run: |
@@ -41,6 +44,7 @@ jobs:
     
     - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
       with:
+        folder-path: check-dir
         config-file: .github/link-config.json
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
