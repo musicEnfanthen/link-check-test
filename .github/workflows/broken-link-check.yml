@@ -41,7 +41,7 @@ jobs:
     
     - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
       with:
-        config-file: '.github/link-config.json'
+        config-file: .github/link-config.json
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
     
