@@ -32,18 +32,18 @@ jobs:
           target: https://edition.anton-webern.ch/
       
       - name: Check AWG with ruzickap action
-        uses: ruzickap/action-my-broken-link-checker@v1
+        uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://edition.anton-webern.ch/
       
       - name: Check MEI with ruzickap action
-        uses: ruzickap/action-my-broken-link-checker@v1
+        uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://music-encoding.org/
 
       
       - name: Check Verovio with ruzickap action
-        uses: ruzickap/action-my-broken-link-checker@v1
+        uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://www.verovio.org/  
 
@@ -73,8 +73,8 @@ jobs:
    
     - name: Check context
       run: |
-        echo "${ github.context.repo.owner }"
-        echo "${ github.context.repo.repo }"
+        echo "${{ github.context.repo.owner }}"
+        echo "${{ github.context.repo.repo }}"
    
     - name: Add comment with link
       if: failure()
