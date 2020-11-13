@@ -25,3 +25,16 @@ jobs:
         with:
           target:  https://edition.anton-webern.ch/
 
+  markdown-link-check:
+    name: Check markdown links
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        reository: musicEnfanthen/music-encoding.github.io
+        ref: master
+      
+    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
+      with:
+        use-verbose-mode: 'yes'
