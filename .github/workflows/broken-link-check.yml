@@ -13,6 +13,7 @@ jobs:
   check:
     name: Check broken links
     runs-on: ubuntu-latest
+    continue-on-error: true
     
     steps:
       - name: Broken Link Check MEI
@@ -25,7 +26,6 @@ jobs:
         with:
           target: https://www.verovio.org/
 
-      
       - name: Broken Link Check AWG
         uses: technote-space/broken-link-checker-action@v2
         with:
@@ -40,7 +40,6 @@ jobs:
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://music-encoding.org/
-
       
       - name: Check Verovio with ruzickap action
         uses: ruzickap/action-my-broken-link-checker@v2
@@ -50,6 +49,7 @@ jobs:
   markdown-link-check:
     name: Check markdown links
     runs-on: ubuntu-latest
+    continue-on-error: true
     
     steps:
     - uses: actions/checkout@v2
@@ -72,13 +72,13 @@ jobs:
         use-verbose-mode: 'yes'
    
     - name: Check context
-      if: failure()
       run: |
+        echo "${{ github.repository_owner }}"
+        echo "${{ github.repository }}"
         echo "${{ github.context.repo.owner }}"
         echo "${{ github.context.repo.repo }}"
    
     - name: Add comment with link
-      if: failure()
       uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
