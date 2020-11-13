@@ -40,4 +40,14 @@ jobs:
         config-file: '.github/link-config.json'
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
-        
+    
+    - name: Add comment with link
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Got a broken link'
+          })
