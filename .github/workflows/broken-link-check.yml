@@ -18,12 +18,34 @@ jobs:
       - name: Broken Link Check MEI
         uses: technote-space/broken-link-checker-action@v2
         with:
-          target:  https://music-encoding.org/
-          
+          target: https://music-encoding.org/
+      
+      - name: Broken Link Check Verovio
+        uses: technote-space/broken-link-checker-action@v2
+        with:
+          target: https://www.verovio.org/
+
+      
       - name: Broken Link Check AWG
         uses: technote-space/broken-link-checker-action@v2
         with:
-          target:  https://edition.anton-webern.ch/
+          target: https://edition.anton-webern.ch/
+      
+      - name: Check AWG with ruzickap action
+        uses: ruzickap/action-my-broken-link-checker@v1
+        with:
+          url: https://edition.anton-webern.ch/
+      
+      - name: Check MEI with ruzickap action
+        uses: ruzickap/action-my-broken-link-checker@v1
+        with:
+          url: https://music-encoding.org/
+
+      
+      - name: Check Verovio with ruzickap action
+        uses: ruzickap/action-my-broken-link-checker@v1
+        with:
+          url: https://www.verovio.org/  
 
   markdown-link-check:
     name: Check markdown links
