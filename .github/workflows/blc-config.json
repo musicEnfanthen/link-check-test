@@ -1,12 +1,8 @@
 {
   "replacementPatterns": [
     {
-      "pattern": "^/community/",
-      "replacement": "https://music-encoding.org/community/"
-    },
-    {
-      "pattern": "^/tutorials/",
-      "replacement": "https://music-encoding.org/tutorials/"
-    },   
+			"pattern": "^/",
+			"replacement": "https://music-encoding.org/"
+		}
   ]
 }
