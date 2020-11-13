@@ -72,6 +72,7 @@ jobs:
         use-verbose-mode: 'yes'
    
     - name: Check context
+      if: failure()
       run: |
         echo "${{ github.context.repo.owner }}"
         echo "${{ github.context.repo.repo }}"
