@@ -70,7 +70,12 @@ jobs:
         config-file: .github/link-check-config.json
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
-    
+   
+    - name: Check context
+      run: |
+        echo "${ github.context.repo.owner }"
+        echo "${ github.context.repo.repo }"
+   
     - name: Add comment with link
       if: failure()
       uses: actions/github-script@v3
