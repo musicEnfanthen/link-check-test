@@ -38,7 +38,7 @@ jobs:
       id: mlc
       with:
         folder-path: check-dir
-        config-file: .github/link-check-config.json
+        config-file: .github/link-checker-config.json
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
 
@@ -51,7 +51,7 @@ jobs:
         REPO: ${{ github.repository }}
         RUN_ID: ${{ github.run_id }}
       with:
-        filename: .github/link-check-issue-template.md
+        filename: .github/link-checker-issue-template.md
   
     - name: Link to issue
       if: failure()
