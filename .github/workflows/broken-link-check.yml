@@ -60,6 +60,7 @@ jobs:
         echo "${{ github.context.repo.repo }}"
    
     - name: Echo output
+      if: always()
       run: |
         echo "${{ steps.mlc.outputs }}"
 
