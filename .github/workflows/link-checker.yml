@@ -5,14 +5,21 @@ on:
     - cron: 0 13 * * 0  # run every Monday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
   workflow_dispatch: # trigger manually
   
+# globals
+env:
+  # music-encoding
+  CHECK_REPO: musicEnfanthen/music-encoding.github.io
+  CHECK_BRANCH: master
+  CHECK_DIR: check-dir
+
+
 jobs:
   website_link_check:
     name: Check website links
     runs-on: ubuntu-latest
     
     steps:
-      - name: Broken Link Check MEI
-        uses: technote-space/broken-link-checker-action@v2
+      - uses: technote-space/broken-link-checker-action@v2
         with:
           target: https://music-encoding.org
       
@@ -22,37 +29,31 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
-      
-    - uses: actions/checkout@v2
-      with:
-        repository: musicEnfanthen/music-encoding.github.io
-        ref: master
-        path: check-dir
-      
-    - name: Check file path
-      run: |
-        ls -alh  
-    
-    - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
-      id: mlc
-      with:
-        folder-path: check-dir
-        config-file: .github/link-checker-config.json
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
+      - uses: actions/checkout@v2
 
-    - name: Create issue for broken links
-      if: failure()
-      id: create-issue
-      uses: JasonEtco/create-an-issue@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPO: ${{ github.repository }}
-        RUN_ID: ${{ github.run_id }}
-      with:
-        filename: .github/link-checker-issue-template.md
-  
-    - name: Link to issue
-      if: failure()
-      run: 'echo Created ${{ steps.create-issue.outputs.url }}'
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ env.CHECK_REPO }}
+          ref: ${{ env.CHECK_BRANCH }}
+          path: ${{ env.CHECK_DIR }}
+
+      - name: Run markdown link check
+        uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
+        id: mlc
+        with:
+          folder-path: ${{ env.CHECK_DIR }}    # remove on music-encoding repo
+          config-file: .github/link-checker-config.json
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+
+      - name: Create issue for broken links
+        if: failure()
+        id: create-issue
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHECK_REPO: ${{ env.CHECK_REPO }}
+          MAIN_REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        with:
+          filename: .github/link-checker-issue-template.md
