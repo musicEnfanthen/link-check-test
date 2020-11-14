@@ -23,30 +23,6 @@ jobs:
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://music-encoding.org/
-
-      - name: Broken Link Check Verovio
-        if: always()
-        uses: technote-space/broken-link-checker-action@v2
-        with:
-          target: https://www.verovio.org/      
-      
-      - name: Check Verovio with ruzickap action
-        if: always()
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://www.verovio.org/  
-
-      - name: Broken Link Check AWG
-        if: always()
-        uses: technote-space/broken-link-checker-action@v2
-        with:
-          target: https://edition.anton-webern.ch/
-      
-      - name: Check AWG with ruzickap action
-        if: always()
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://edition.anton-webern.ch/
       
       
       
