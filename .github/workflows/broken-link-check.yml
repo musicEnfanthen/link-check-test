@@ -44,6 +44,7 @@ jobs:
         ls -alh  
     
     - uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
+      id: mlc
       with:
         folder-path: check-dir
         config-file: .github/link-check-config.json
@@ -57,6 +58,11 @@ jobs:
         echo "${{ github.repository }}"
         echo "${{ github.context.repo.owner }}"
         echo "${{ github.context.repo.repo }}"
+   
+    - name: Echo output
+      run: |
+        echo "${{ steps.mlc.outputs }}"
+
    
     - name: Add comment with link
       if: always()
