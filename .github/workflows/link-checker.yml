@@ -14,14 +14,7 @@ jobs:
       - name: Broken Link Check MEI
         uses: technote-space/broken-link-checker-action@v2
         with:
-          target: https://music-encoding.org/
-
-      - name: Check MEI with ruzickap action
-        if: always()
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://music-encoding.org/
-      
+          target: https://music-encoding.org
       
       
   markdown-link-check:
@@ -55,6 +48,9 @@ jobs:
       uses: JasonEtco/create-an-issue@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RUNNER_ID: ${{ github.run_id }}
+        EVENT_PATH: ${{ github.event_path }}
+        JOB: ${{ github.job }}
       with:
         filename: .github/link-check-issue-template.md
     - name: Link to issue
