@@ -1,5 +1,5 @@
 ---
-title: Broken links found (via {{ event }}
+title: Broken links found (via {{ event }})
 labels: bug
 ---
 {{ workflow}} found broken links. The check was triggered by {{ event }} on branch {{ ref }} with latest commit {{sha}}.
