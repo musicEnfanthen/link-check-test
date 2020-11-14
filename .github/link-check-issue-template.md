@@ -18,8 +18,12 @@ github.event_path: {{github.event_path}}
 
 github.job: {{github.job }}
 
-RUNNER_ID: {{ env.RUNNER_ID }}
+RUN_ID: {{ env.RUN_ID }}
+
+RUN_NUMBER: {{ env.RUN_NUMBER }}
 
 EVENT_PATH: {{ env.EVENT_PATH }}
 
 JOB: {{ env.JOB }}
+
+ACTION_PATH: {{ env.ACTION_PATH }}
