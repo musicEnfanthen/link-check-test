@@ -10,7 +10,6 @@ jobs:
   check:
     name: Check broken links
     runs-on: ubuntu-latest
-    continue-on-error: true
     
     steps:
       - name: Broken Link Check MEI
