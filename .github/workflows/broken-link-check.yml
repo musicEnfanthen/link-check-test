@@ -65,7 +65,29 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           github.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: 'Got a broken link'
+            owner: github.repository_owner,
+            repo: github.repo,
+            body: 'Got broken links. See '
           })
+          
+  link-checker:
+    name: Check links with link checker
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: musicEnfanthen/music-encoding.github.io
+        ref: master
+        path: check-dir
+    
+    - name: Link Checker
+      id: lc
+      uses: peter-evans/link-checker@v1
+      with:
+        args: -v -r ./check-dir
+
+    - name: Fail if there were link errors
+      run: exit ${{ steps.lc.outputs.exit_code }} 
+    
