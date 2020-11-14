@@ -58,43 +58,13 @@ jobs:
         echo "${{ github.repository }}"
         echo "${{ github.context.repo.owner }}"
         echo "${{ github.context.repo.repo }}"
-   
-    - name: Echo output
-      if: always()
-      run: |
-        echo "${{ steps.mlc.outputs }}"
-
-   
-    - name: Add comment with link
-      if: always()
-      uses: actions/github-script@v3
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          github.issues.createComment({
-            owner: github.repository_owner,
-            repo: github.repo,
-            body: 'Got broken links. See '
-          })
-          
-  link-checker:
-    name: Check links with link checker
-    runs-on: ubuntu-latest
-    continue-on-error: true
     
-    steps:
-    - uses: actions/checkout@v2
+    - uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: create-issue
       with:
-        repository: musicEnfanthen/music-encoding.github.io
-        ref: master
-        path: check-dir
-    
-    - name: Link Checker
-      id: lc
-      uses: peter-evans/link-checker@v1
-      with:
-        args: -d ./check-dir -r ./check-dir
-
-    - name: Fail if there were link errors
-      run: exit ${{ steps.lc.outputs.exit_code }} 
+        filename: .github/broken-link-issue-template.md
+    - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
+    - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
     
