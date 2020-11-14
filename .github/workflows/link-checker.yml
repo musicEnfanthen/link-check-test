@@ -9,7 +9,7 @@ on:
 env:
   # music-encoding
   CHECK_REPO: musicEnfanthen/verovio.org
-  CHECK_BRANCH: master
+  CHECK_BRANCH: gh-pages
   CHECK_DIR: check-dir
 
 
