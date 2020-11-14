@@ -60,11 +60,14 @@ jobs:
         echo "${{ github.context.repo.repo }}"
     
     - uses: JasonEtco/create-an-issue@v2
+      if: failure()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       id: create-issue
       with:
-        filename: .github/broken-link-issue-template.md
+        filename: .github/link-check-issue-template.md
     - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
+      if: failure()
     - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
+      if: failure()
     
