@@ -8,9 +8,9 @@ on:
         repo:
           description: 'Repository to check'     
           required: true
-          default: ${{ github.repository}}
+          default: music-encoding/music-encoding.github.io
         branch:
-          description: 'Brnach to check'  
+          description: 'Branch to check'
           required: true
           default: master
   
