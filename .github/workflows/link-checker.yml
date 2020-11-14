@@ -48,7 +48,9 @@ jobs:
       uses: JasonEtco/create-an-issue@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        RUNNER_ID: ${{ github.run_id }}
+        RUN_ID: ${{ github.run_id }}
+        RUN_NUMBER: ${{ github.run_number }}
+        ACTION_PATH: ${{ github.action_path }}
         EVENT_PATH: ${{ github.event_path }}
         JOB: ${{ github.job }}
       with:
