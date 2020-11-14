@@ -4,17 +4,17 @@ labels: bug
 ---
 Link checker found broken links. Check the context: 
 
-tools.context.action: {{ tools.context.action }}
+tools.context.action: {{ action }}
 
-tools.context.event: {{ tools.context.event }}
+tools.context.event: {{ event }}
 
-tools.context.workflow: {{ tools.context.workflow }}
+tools.context.workflow: {{ workflow }}
 
-tools.context.payload: {{ tools.context.payload }}
+tools.context.payload: {{ payload }}
 
-tools.context.ref: {{ tools.context.ref }}
+tools.context.ref: {{ ref }}
 
-tools.context.sha: {{ tools.context.sha }}
+tools.context.sha: {{ sha }}
 
-tools.context.repo: {{ tools.context.repo }}
+tools.context.repo: {{ repo }}
 
