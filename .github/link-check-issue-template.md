@@ -2,19 +2,18 @@
 title: Broken links found
 labels: bug
 ---
-Link checker found broken links. Check the context: 
+{{ workflow}} found broken links. The check was triggered by {{ event }} on branch {{ ref }} with latest commit {{sha}}.
 
-tools.context.action: {{ action }}
+You can find the check results here: ... // TODO
 
-tools.context.event: {{ event }}
-
-tools.context.workflow: {{ workflow }}
+Check the context: 
 
 tools.context.payload: {{ payload }}
 
-tools.context.ref: {{ ref }}
+run_id: {{ run_id }}
 
-tools.context.sha: {{ sha }}
+github.run_id: {{ github.run_id }}
 
-tools.context.repo: {{ repo }}
+github.event_path: {{github.event_path}}
 
+github.job: {{github.job }}
