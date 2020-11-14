@@ -4,12 +4,22 @@ on:
   schedule:
     - cron: 0 13 * * 0  # run every Monday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
   workflow_dispatch: # trigger manually
+    inputs:
+        repo:
+          description: 'Repository to check'     
+          required: true
+          default: ${{ github.repository}}
+        branch:
+          description: 'Brnach to check'  
+          required: true
+          default: master
+  
   
 # globals
 env:
   # music-encoding
-  CHECK_REPO: musicEnfanthen/verovio.org
-  CHECK_BRANCH: gh-pages
+  CHECK_REPO: musicEnfanthen/music-encoding.github.io
+  CHECK_BRANCH: master
   CHECK_DIR: check-dir
 
 
@@ -29,6 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - run: |
+          echo "Repo: ${{ github.event.inputs.repo }}"
+          echo "Branch: ${{ github.event.inputs.branch }}" 
+      
       - uses: actions/checkout@v2
 
       - uses: actions/checkout@v2
