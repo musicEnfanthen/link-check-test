@@ -20,32 +20,39 @@ jobs:
         uses: technote-space/broken-link-checker-action@v2
         with:
           target: https://music-encoding.org/
-      
+
+      - name: Check MEI with ruzickap action
+        if: always()
+        uses: ruzickap/action-my-broken-link-checker@v2
+        with:
+          url: https://music-encoding.org/
+
       - name: Broken Link Check Verovio
+        if: always()
         uses: technote-space/broken-link-checker-action@v2
         with:
-          target: https://www.verovio.org/
+          target: https://www.verovio.org/      
+      
+      - name: Check Verovio with ruzickap action
+        if: always()
+        uses: ruzickap/action-my-broken-link-checker@v2
+        with:
+          url: https://www.verovio.org/  
 
       - name: Broken Link Check AWG
+        if: always()
         uses: technote-space/broken-link-checker-action@v2
         with:
           target: https://edition.anton-webern.ch/
       
       - name: Check AWG with ruzickap action
+        if: always()
         uses: ruzickap/action-my-broken-link-checker@v2
         with:
           url: https://edition.anton-webern.ch/
       
-      - name: Check MEI with ruzickap action
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://music-encoding.org/
       
-      - name: Check Verovio with ruzickap action
-        uses: ruzickap/action-my-broken-link-checker@v2
-        with:
-          url: https://www.verovio.org/  
-
+      
   markdown-link-check:
     name: Check markdown links
     runs-on: ubuntu-latest
@@ -72,6 +79,7 @@ jobs:
         use-verbose-mode: 'yes'
    
     - name: Check context
+      if: always()
       run: |
         echo "${{ github.repository_owner }}"
         echo "${{ github.repository }}"
@@ -79,6 +87,7 @@ jobs:
         echo "${{ github.context.repo.repo }}"
    
     - name: Add comment with link
+      if: always()
       uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
