@@ -8,7 +8,7 @@ on:
 # globals
 env:
   # music-encoding
-  CHECK_REPO: musicEnfanthen/music-encoding.github.io
+  CHECK_REPO: musicEnfanthen/verovio.org
   CHECK_BRANCH: master
   CHECK_DIR: check-dir
 
