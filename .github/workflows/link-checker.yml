@@ -1,14 +1,13 @@
-name: Broken Link Check
+name: Link Checker
 
 on:
   schedule:
-    # run every Monday at 1pm UTC https://crontab.guru/#0_13_*_*_1
-    - cron: 0 13 * * 0 
+    - cron: 0 13 * * 0  # run every Monday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
   workflow_dispatch: # trigger manually
   
 jobs:
-  check:
-    name: Check broken links
+  website_link_check:
+    name: Check website links
     runs-on: ubuntu-latest
     
     steps:
@@ -28,7 +27,6 @@ jobs:
   markdown-link-check:
     name: Check markdown links
     runs-on: ubuntu-latest
-    continue-on-error: true
     
     steps:
     - uses: actions/checkout@v2
@@ -50,24 +48,15 @@ jobs:
         config-file: .github/link-check-config.json
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
-   
-    - name: Check context
-      if: always()
-      run: |
-        echo "${{ github.repository_owner }}"
-        echo "${{ github.repository }}"
-        echo "${{ github.context.repo.owner }}"
-        echo "${{ github.context.repo.repo }}"
     
-    - uses: JasonEtco/create-an-issue@v2
+    - name: Create issue for broken links
       if: failure()
+      id: create-issue
+      uses: JasonEtco/create-an-issue@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      id: create-issue
       with:
         filename: .github/link-check-issue-template.md
-    - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
+    - name: Link to issue
       if: failure()
-    - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
-      if: failure()
-    
+      run: 'echo Created ${{ steps.create-issue.outputs.url }}'
