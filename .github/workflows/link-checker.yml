@@ -41,11 +41,11 @@ jobs:
     steps:
       - name: Set variables
         run: |
-          if ${{ github.event.inputs.repo }} ; then
+          if [[ "${{ github.event.inputs.repo }}" != '' ]] ; then
             echo "Setting repo: ${{ github.event.inputs.repo }}"
             echo "CHECK_REPO=${{ github.event.inputs.repo }}" >> $GITHUB_ENV
           fi
-          if ${{ github.event.inputs.branch }} ; then
+          if [[ "${{ github.event.inputs.branch }}" != '' ]] ; then
             echo "Setting branch: ${{ github.event.inputs.branch }}"
             echo "CHECK_BRANCH=${{ github.event.inputs.branch }}" >> $GITHUB_ENV
           fi
