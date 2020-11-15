@@ -18,6 +18,7 @@ on:
 # globals
 env:
   # music-encoding
+  CHECK_WEBSITE: https://music-encoding.org
   CHECK_REPO: musicEnfanthen/music-encoding.github.io
   CHECK_BRANCH: master
   CHECK_DIR: check-dir
@@ -31,7 +32,7 @@ jobs:
     steps:
       - uses: technote-space/broken-link-checker-action@v2
         with:
-          target: https://music-encoding.org
+          target: ${{ env.CHECK_WEBSITE }}
       
       
   markdown-link-check:
