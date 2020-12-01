@@ -2,7 +2,7 @@ name: Link Checker
 
 on:
   schedule:
-    - cron: '0 13 * * 0'  # run every Monday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
+    - cron: '0 13 * * 0'  # run every Sunday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
   workflow_dispatch: # trigger manually
     inputs:
         repo:
