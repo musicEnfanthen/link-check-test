@@ -11,6 +11,10 @@
    	{
 	     "pattern": "^/",
 	     "replacement": "https://music-encoding.org/"
+	},
+	{
+	     "pattern": "^_tutorials/102_march.png",
+	     "replacement": "./102_march.jpg"
 	}
   ],
   "retryOn429": true,
