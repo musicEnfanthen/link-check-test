@@ -2,13 +2,16 @@
   "ignorePatterns": [
         {
             "pattern": "^(http|https)://localhost"
-        }
+        },
+	{
+    	    "pattern": "mailto:{{.*}}"
+  	}
     ],
   "replacementPatterns": [
-    {
-			"pattern": "^/",
-			"replacement": "https://music-encoding.org/"
-		}
+   	{
+	     "pattern": "^/",
+	     "replacement": "https://music-encoding.org/"
+	}
   ],
   "retryOn429": true,
   "aliveStatusCodes": [200, 206]
