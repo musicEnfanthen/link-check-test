@@ -14,7 +14,7 @@
 	},
 	{
 	     "pattern": "^../102_march.png",
-	     "replacement": "./102_march.jpg"
+	     "replacement": "./102_march.png"
 	}
   ],
   "retryOn429": true,
