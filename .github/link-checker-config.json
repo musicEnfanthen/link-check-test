@@ -5,7 +5,10 @@
         },
 	{
     	    "pattern": "mailto:{{.*}}"
-  	}
+  	},
+        {
+	    "pattern": "^.github"
+	}
     ],
   "replacementPatterns": [
    	{
