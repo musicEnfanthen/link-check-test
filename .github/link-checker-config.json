@@ -7,7 +7,7 @@
     	    "pattern": "mailto:{{.*}}"
   	},
         {
-	    "pattern": "^.github/"
+	    "pattern": "^.github/*"
 	}
     ],
   "replacementPatterns": [
