@@ -13,8 +13,8 @@
 	     "replacement": "https://music-encoding.org/"
 	},
    	{
-	     "pattern": "^../schema",
-	     "replacement": "https://music-encoding.org/schema"
+	     "pattern": "^../schema/",
+	     "replacement": "https://music-encoding.org/schema/"
 	},
 	{
 	     "pattern": "^../102_march.png",
