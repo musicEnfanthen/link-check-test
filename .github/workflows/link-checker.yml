@@ -32,11 +32,11 @@ env:
 jobs:
   website_link_check:
     name: Check website links
-    if: ${{ github.repository_owner == 'music-encoding' }}
     runs-on: ubuntu-latest
     
     steps:
       - name: Validate
+        if: ${{ github.repository_owner == env.CHECK_OWNER }}
         run: |
           echo ${{ env.CHECK_OWNER }}
           echo ${{ github.repository_owner }}
