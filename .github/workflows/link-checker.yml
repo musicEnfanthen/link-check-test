@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Validate
         run: |
-          echo ${{ en.CHECK_OWNER }}
+          echo ${{ env.CHECK_OWNER }}
           echo ${{ github.repository_owner }}
           echo $( ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }} )
 
