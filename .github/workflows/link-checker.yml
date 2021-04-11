@@ -89,6 +89,10 @@ jobs:
           config-file: .github/link-checker-config.json
           use-quiet-mode: 'yes'
           use-verbose-mode: 'yes'
+      
+      - name: Congratulations
+        if: ${{ success() && github.repository_owner == env.CHECK_OWNER }}
+        run: echo "🎉 No broken links found 🎊"
 
       - name: Create issue for broken links
         if: ${{ failure() && github.repository_owner == env.CHECK_OWNER }}
