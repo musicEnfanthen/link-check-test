@@ -32,7 +32,7 @@ env:
 jobs:
   website_link_check:
     name: Check website links
-    if: ${{ github.repository_owner == env.CHECK_OWNER }}
+    if: ${{ github.repository_owner == 'music-encoding' }}
     runs-on: ubuntu-latest
     
     steps:
@@ -42,8 +42,7 @@ jobs:
           echo ${{ github.repository_owner }}
           echo ${{ github.repository_owner == env.CHECK_OWNER }}
 
-      - if: ${{ github.repository_owner == env.CHECK_OWNER }}
-        uses: technote-space/broken-link-checker-action@v2
+      - uses: technote-space/broken-link-checker-action@v2
         with:
           target: ${{ env.CHECK_WEBSITE }}
       
@@ -54,7 +53,7 @@ jobs:
     
     steps:
       - name: Set variables
-        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
+        if: ${{ github.repository_owner == env.CHECK_OWNER }}
         run: |
           if [[ "${{ github.event.inputs.owner }}" != '' ]] ; then
             echo "Setting repo: ${{ github.event.inputs.owner }}"
@@ -70,11 +69,11 @@ jobs:
           fi
       
       - name: Checkout main repo
-        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
+        if: ${{ github.repository_owner == env.CHECK_OWNER }}
         uses: actions/checkout@v2
 
       - name: Checkout CHECK_REPO into CHECK_DIR
-        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
+        if: ${{ github.repository_owner == env.CHECK_OWNER }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.CHECK_OWNER }}/${{ env.CHECK_REPO }}
@@ -82,7 +81,7 @@ jobs:
           path: ${{ env.CHECK_DIR }}
 
       - name: Run markdown link check
-        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
+        if: ${{ github.repository_owner == env.CHECK_OWNER }}
         uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
         id: mlc
         with:
@@ -92,7 +91,7 @@ jobs:
           use-verbose-mode: 'yes'
 
       - name: Create issue for broken links
-        if: failure() && ( ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }} )
+        if: failure() && ( ${{ github.repository_owner == env.CHECK_OWNER }} )
         id: create-issue
         uses: JasonEtco/create-an-issue@v2
         env:
