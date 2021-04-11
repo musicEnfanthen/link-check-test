@@ -91,7 +91,7 @@ jobs:
           use-verbose-mode: 'yes'
 
       - name: Create issue for broken links
-        if: failure() && ( ${{ github.repository_owner == env.CHECK_OWNER }} )
+        if: ${{ failure() && github.repository_owner == env.CHECK_OWNER }}
         id: create-issue
         uses: JasonEtco/create-an-issue@v2
         env:
