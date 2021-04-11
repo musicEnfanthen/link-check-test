@@ -41,7 +41,7 @@ jobs:
           echo ${{ github.repository_owner }}
           echo ${{ github.repository_owner == env.CHECK_OWNER }}
 
-      - if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }} 
+      - if: ${{ github.repository_owner == env.CHECK_OWNER }}
         uses: technote-space/broken-link-checker-action@v2
         with:
           target: ${{ env.CHECK_WEBSITE }}
