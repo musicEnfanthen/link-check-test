@@ -5,10 +5,14 @@ on:
     - cron: '0 13 * * 0'  # run every Sunday at 1pm UTC https://crontab.guru/#0_13_*_*_1 
   workflow_dispatch: # trigger manually
     inputs:
+        owner:
+          description: 'Owner to check'
+          required: true
+          default: music-encoding
         repo:
           description: 'Repository to check'     
           required: true
-          default: music-encoding/music-encoding.github.io
+          default: music-encoding.github.io
         branch:
           description: 'Branch to check'
           required: true
@@ -19,7 +23,8 @@ on:
 env:
   # music-encoding
   CHECK_WEBSITE: https://music-encoding.org
-  CHECK_REPO: music-encoding/music-encoding.github.io
+  CHECK_OWNER: music-encoding 
+  CHECK_REPO: music-encoding.github.io
   CHECK_BRANCH: master
   CHECK_DIR: check-dir
 
@@ -41,7 +46,12 @@ jobs:
     
     steps:
       - name: Set variables
+        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
         run: |
+          if [[ "${{ github.event.inputs.owner }}" != '' ]] ; then
+            echo "Setting repo: ${{ github.event.inputs.owner }}"
+            echo "CHECK_OWNER=${{ github.event.inputs.owner }}" >> $GITHUB_ENV
+          fi
           if [[ "${{ github.event.inputs.repo }}" != '' ]] ; then
             echo "Setting repo: ${{ github.event.inputs.repo }}"
             echo "CHECK_REPO=${{ github.event.inputs.repo }}" >> $GITHUB_ENV
@@ -52,16 +62,19 @@ jobs:
           fi
       
       - name: Checkout main repo
+        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
         uses: actions/checkout@v2
 
       - name: Checkout CHECK_REPO into CHECK_DIR
+        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
         uses: actions/checkout@v2
         with:
-          repository: ${{ env.CHECK_REPO }}
+          repository: ${{ env.CHECK_OWNER }}/${{ env.CHECK_REPO }}
           ref: ${{ env.CHECK_BRANCH }}
           path: ${{ env.CHECK_DIR }}
 
       - name: Run markdown link check
+        if: ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }}
         uses: gaurav-nelson/github-action-markdown-link-check@1.0.8
         id: mlc
         with:
@@ -71,7 +84,7 @@ jobs:
           use-verbose-mode: 'yes'
 
       - name: Create issue for broken links
-        if: failure()
+        if: failure() && ( ${{ github.repository_owner }} == ${{ env.CHECK_OWNER }} )
         id: create-issue
         uses: JasonEtco/create-an-issue@v2
         env:
