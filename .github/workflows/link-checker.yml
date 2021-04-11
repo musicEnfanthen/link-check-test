@@ -32,6 +32,7 @@ env:
 jobs:
   website_link_check:
     name: Check website links
+    if: ${{ github.repository_owner == env.CHECK_OWNER }}
     runs-on: ubuntu-latest
     
     steps:
