@@ -3,3 +3,5 @@
 # link-check-test
 
 Repo to test broken links action
+
+Broken link to test: https://github.com/{{ env.broken }}
